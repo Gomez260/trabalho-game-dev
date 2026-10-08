@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b2ish2uuhes1h"]
+
+[ext_resource type="Script" uid="uid://cb8grp6bdvogd" path="res://Scripts/bloco.gd" id="1_mtu4g"]
+
+[node name="Area2D" type="Area2D" unique_id=1047865300]
+script = ExtResource("1_mtu4g")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=709211043]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1337394894]

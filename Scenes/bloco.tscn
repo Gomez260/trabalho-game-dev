@@ -1,10 +1,20 @@
 [gd_scene format=3 uid="uid://b2ish2uuhes1h"]
 
 [ext_resource type="Script" uid="uid://cb8grp6bdvogd" path="res://Scripts/bloco.gd" id="1_mtu4g"]
+[ext_resource type="Texture2D" uid="uid://dvfll2wowdxp2" path="res://Assests/Plataform.png" id="2_gb5kq"]
 
-[node name="Area2D" type="Area2D" unique_id=1047865300]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eofqg"]
+size = Vector2(2123, 385.78387)
+
+[node name="Area2D" type="StaticBody2D" unique_id=469478870]
 script = ExtResource("1_mtu4g")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=709211043]
+scale = Vector2(131.62033, 85.33954)
+texture = ExtResource("2_gb5kq")
+region_enabled = true
+region_rect = Rect2(0.7482147, 29.795645, 16.295681, 13.383261)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1337394894]
+scale = Vector2(1.0229361, -2.9858682)
+shape = SubResource("RectangleShape2D_eofqg")

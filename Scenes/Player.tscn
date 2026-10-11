@@ -128,6 +128,7 @@ animations = [{
 size = Vector2(20, 50)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=2028421705]
+collision_mask = 6
 script = ExtResource("1_kyqiw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=209506994]
@@ -139,6 +140,7 @@ sprite_frames = SubResource("SpriteFrames_l0mw4")
 animation = &"Hit"
 
 [node name="CollisionShape2D2" type="Area2D" parent="." unique_id=658646049]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D2" unique_id=2098920105]
 position = Vector2(10, -3.5)

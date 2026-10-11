@@ -9,9 +9,9 @@ const JUMP_VELOCITY = -600.0
 
 func hitting():
 	animated_sprite.play("Hit")
-	var corpos_dentro = hit_area.get_overlapping_bodies()
+	var hitted = hit_area.get_overlapping_bodies()
 	
-	for body in corpos_dentro:
+	for body in hitted:
 		if(body.is_in_group("Inimigos")):
 			body.die()
 	await get_tree().create_timer(2).timeout

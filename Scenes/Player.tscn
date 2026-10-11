@@ -124,6 +124,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
+size = Vector2(20, 50)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=2028421705]
 script = ExtResource("1_kyqiw")
 
@@ -133,5 +136,10 @@ shape = SubResource("RectangleShape2D_1e7my")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1667543397]
 sprite_frames = SubResource("SpriteFrames_l0mw4")
-animation = &"Jump"
-speed_scale = 2.0
+animation = &"Hit"
+
+[node name="CollisionShape2D2" type="Area2D" parent="." unique_id=658646049]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D2" unique_id=2098920105]
+position = Vector2(10, -3.5)
+shape = SubResource("RectangleShape2D_kyqiw")

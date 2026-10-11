@@ -5,6 +5,16 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hit_area = $CollisionShape2D2
+
+func hitting():
+	animated_sprite.play("Hit")
+	var corpos_dentro = hit_area.get_overlapping_bodies()
+	
+	for body in corpos_dentro:
+		if(body.is_in_group("Inimigos")):
+			body.die()
+	await get_tree().create_timer(2).timeout
 
 func _physics_process(delta: float) -> void:
 	var viewport = get_viewport_rect()
@@ -35,8 +45,15 @@ func _physics_process(delta: float) -> void:
 
 	if direction != 0:
 		animated_sprite.flip_h = direction < 0
+		if direction > 0:
+			hit_area.position.x = 0
+		else:
+			hit_area.position.x = -20
 	
 	if global_position.x < 0:
 		global_position.x = viewport.size.x
 	elif global_position.x > viewport.size.x:
 		global_position.x = 0
+		
+	if Input.is_action_just_pressed("Hit"):
+		hitting()

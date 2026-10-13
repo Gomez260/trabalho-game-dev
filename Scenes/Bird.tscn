@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b2ish2uuhes1h"]
+
+[ext_resource type="Script" uid="uid://cb8grp6bdvogd" path="res://Scripts/Bird.gd" id="1_6djdu"]
+[ext_resource type="Texture2D" uid="uid://lo04fhmo4d73" path="res://Assests/flying1.png" id="2_okd8w"]
+[ext_resource type="Texture2D" uid="uid://b701ave1810g0" path="res://Assests/Flying2.png" id="3_tto85"]
+[ext_resource type="Texture2D" uid="uid://bxwjgwfvojion" path="res://Assests/Hitfly.png" id="4_qo1os"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eofqg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_okd8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tto85")
+}],
+"loop": 1,
+"name": &"Fly",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qo1os")
+}],
+"loop": 1,
+"name": &"Hit",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eofqg"]
+size = Vector2(80.16138, 21.09939)
+
+[node name="Area2D" type="Area2D" unique_id=1596155012]
+script = ExtResource("1_6djdu")
+hit_fall_speed = 400.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=527474129]
+scale = Vector2(4.9444447, 3.8888893)
+sprite_frames = SubResource("SpriteFrames_eofqg")
+animation = &"Hit"
+speed_scale = 0.7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1337394894]
+scale = Vector2(1.0229361, -2.9858682)
+shape = SubResource("RectangleShape2D_eofqg")

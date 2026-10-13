@@ -39,17 +39,6 @@ func _ready() -> void:
 	sprite.flip_h = direction < 0
 	angular_direction = 1.0 if direction > 0 else -1.0
 
-	# Escolhe o centro correspondente ao nível de nascimento.
-	var main = get_parent()
-	var center_marker: Marker2D
-
-	if level == 4:
-		center_marker = main.get_node("CircleCenter1")
-	else:
-		center_marker = main.get_node("CircleCenter2")
-
-	circle_center = center_marker.global_position
-
 	# Calcula a entrada na elipse pelo lado de onde o pássaro vem.
 	entry_angle = PI if direction > 0 else 0.0
 
@@ -58,7 +47,7 @@ func _ready() -> void:
 		radius_y * sin(entry_angle)
 	)
 
-	# Desce na diagonal até a entrada da trajetória.
+	# Desce na diagonal até a entrada sda trajetória.
 	# O destino fica entre o marcador de nascimento e a elipse.
 	descent_target = Vector2(
 		entry_point.x,
@@ -142,9 +131,9 @@ func move_out(delta: float) -> void:
 
 	var screen_width = get_viewport_rect().size.x
 
-	if exit_direction < 0 and global_position.x > screen_width + 100.0:
+	if exit_direction < 0 and global_position.x < -100.0:
 		queue_free()
-	elif exit_direction > 0 and global_position.x < -100.0:
+	elif exit_direction > 0 and global_position.x > screen_width + 100.0:
 		queue_free()
 		
 func take_hit() -> void:

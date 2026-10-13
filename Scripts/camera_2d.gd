@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	var player_screen_number = int((player.position.y - limit_bottom))
 	var camera_screen_number = int((position.y - limit_bottom))
 	
-	print("Player: ", player_screen_number, " - Camera: ", camera_screen_number)
+	#print("Player: ", player_screen_number, " - Camera: ", camera_screen_number)
 	
 	if player_screen_number != camera_screen_number:
 		position.y += adjustment_speed * delta * (player_screen_number - camera_screen_number)

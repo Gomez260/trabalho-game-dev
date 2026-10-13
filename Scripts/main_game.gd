@@ -17,19 +17,22 @@ func _ready() -> void:
 	spawn_uga()
 
 func spawn_uga() -> void:
-	print("Spawnando Uga!")
 	var uga = UGA_SCENE.instantiate()
-
-	var screen_size = get_viewport().get_visible_rect().size
+	add_child(uga)
+	print("Antes: ", uga.global_position)
+	var viewport_width = get_viewport().get_visible_rect().size.x
 	var from_left = randf() < 0.5
 
-	uga.direction = 1 if from_left else -1
-	uga.global_position = Vector2(
-		-50.0 if from_left else screen_size.x + 50.0,
-		570.0
-	)
+	var spawn_x: float
+	
+	if from_left:
+		spawn_x = 50.0
+		uga.direction = 1
+	else:
+		spawn_x = viewport_width - 50.0
+		uga.direction = -1
 
-	add_child(uga)
+	uga.global_position = Vector2(spawn_x, 570.0)
 
 func spawn_bird() -> void:
 	print("Spawnando passaro!")

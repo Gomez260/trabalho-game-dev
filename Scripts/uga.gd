@@ -1,4 +1,3 @@
-
 extends CharacterBody2D
 
 @export var speed: float = 40.0
@@ -68,6 +67,14 @@ func fall_after_hit(delta: float) -> void:
 	global_position.y += hit_fall_speed * delta
 	sprite.rotation += hit_rotation_speed * delta
 
+func _process(_delta: float) -> void:
+	var camera: Camera2D = get_viewport().get_camera_2d()
+	if camera == null:
+		return
+
 	var screen_height = get_viewport_rect().size.y
-	if global_position.y > screen_height + 100.0:
+	var camera_bottom = camera.get_screen_center_position().y + screen_height / (2.0 * camera.zoom.y)
+		
+	if global_position.y > camera_bottom + 300.0:
+		print("Uga removido! Y: ", global_position.y, " | Limite: ", camera_bottom)
 		queue_free()

@@ -21,7 +21,6 @@ enum State {
 }
 
 var direction: int = 1
-var level: int = 3
 var state: State = State.DESCENDING
 
 var descent_target: Vector2
@@ -39,7 +38,6 @@ func _ready() -> void:
 	sprite.flip_h = direction < 0
 	angular_direction = 1.0 if direction > 0 else -1.0
 
-	# Calcula a entrada na elipse pelo lado de onde o pássaro vem.
 	entry_angle = PI if direction > 0 else 0.0
 
 	var entry_point = circle_center + Vector2(
@@ -48,7 +46,6 @@ func _ready() -> void:
 	)
 
 	# Desce na diagonal até a entrada sda trajetória.
-	# O destino fica entre o marcador de nascimento e a elipse.
 	descent_target = Vector2(
 		entry_point.x,
 		global_position.y + descent_distance
@@ -97,7 +94,6 @@ func move_in_circles(delta: float) -> void:
 	
 	update_sprite_direction()
 
-	# Conta uma volta quando cruza novamente o ângulo de entrada.
 	var previous_turn = floor(
 		abs(previous_angle - entry_angle) / TAU
 	)

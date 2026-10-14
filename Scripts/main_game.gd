@@ -36,7 +36,7 @@ func spawn_uga() -> void:
 	# Nasce na altura do jogador ou um pouco acima.
 	var spawn_y = player.global_position.y
 	if randf() < 0.5:
-		spawn_y -= 160 * randi_range(0, 3)
+		spawn_y -= 160 * randi_range(0, 2)
 
 	uga.global_position = Vector2(spawn_x, spawn_y)
 	uga.direction = 1 if from_left else -1

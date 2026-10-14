@@ -150,4 +150,9 @@ func fall_after_hit(delta: float) -> void:
 
 	if global_position.y > screen_height + 100.0:
 		queue_free()
+		
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("hitBird"):
+		take_hit()
+
 	

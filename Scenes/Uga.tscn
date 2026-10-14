@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://u7sc0gb252ta" path="res://Scripts/uga.gd" id="1_wepkn"]
 [ext_resource type="Texture2D" uid="uid://7jvm6geb1a3u" path="res://Assests/ugaHit.png" id="2_654si"]
 [ext_resource type="Texture2D" uid="uid://u1ggf7f74b5j" path="res://Assests/ugaWalk.png" id="2_j42sm"]
+[ext_resource type="Texture2D" uid="uid://bbtp3eiyvv654" path="res://Assests/ugaHit - Copia.png" id="3_654si"]
 [ext_resource type="Texture2D" uid="uid://cn4obsed6kd2l" path="res://Assests/ugaWalk1.png" id="3_wepkn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cqbp4"]
@@ -14,10 +15,13 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_654si")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_654si")
 }],
 "loop": 1,
 "name": &"Hit",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -44,5 +48,6 @@ shape = SubResource("RectangleShape2D_cqbp4")
 scale = Vector2(3.78125, 3.5937502)
 sprite_frames = SubResource("SpriteFrames_eofqg")
 animation = &"Hit"
+frame_progress = 0.6124915
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1574671634]

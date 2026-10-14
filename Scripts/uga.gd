@@ -11,6 +11,7 @@ extends CharacterBody2D
 
 var is_hit: bool = false
 var direction: int = 1
+var origin_position: Vector2
 
 enum State {
 	WALKING,
@@ -21,6 +22,7 @@ var state: State = State.WALKING
 
 func _ready() -> void:
 	floor_ray.enabled = true
+	origin_position = global_position
 	update_direction()
 	sprite.play("Walk")
 
@@ -59,13 +61,32 @@ func take_hit() -> void:
 
 	is_hit = true
 	state = State.EXITING
-	velocity = Vector2.ZERO
+	
+	set_collision_layer_value(1, false)
+	set_collision_mask_value(1, false)
+	
+	direction *= -1
 	sprite.play("Hit")
 
 func fall_after_hit(delta: float) -> void:
-	velocity.y += gravity * delta
-	global_position.y += hit_fall_speed * delta
-	sprite.rotation += hit_rotation_speed * delta
+	var screen_width = get_viewport_rect().size.x
+	var camera = get_viewport().get_camera_2d()
+
+	var half_width = screen_width / (2.0 * camera.zoom.x)
+	var camera_x = camera.get_screen_center_position().x
+
+	var target_x = camera_x + (half_width + 100.0) * direction
+
+	if abs(global_position.x - target_x) < 5.0:
+		print("removed")
+		queue_free()
+		return
+
+	global_position.x = move_toward(
+		global_position.x,
+		target_x,
+		speed * 2.0 * delta
+	)
 
 func _process(_delta: float) -> void:
 	var camera: Camera2D = get_viewport().get_camera_2d()
@@ -78,3 +99,7 @@ func _process(_delta: float) -> void:
 	if global_position.y > camera_bottom + 300.0:
 		print("Uga removido! Y: ", global_position.y, " | Limite: ", camera_bottom)
 		queue_free()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		take_hit()

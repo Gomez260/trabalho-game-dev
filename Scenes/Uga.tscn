@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://wwh4i6p4c888"]
 
 [ext_resource type="Texture2D" uid="uid://b58y6ool7o2c" path="res://Assests/ugaWalk2.png" id="1_8nhju"]
-[ext_resource type="Script" uid="uid://u7sc0gb252ta" path="res://Scenes/uga.gd" id="1_wepkn"]
+[ext_resource type="Script" uid="uid://u7sc0gb252ta" path="res://Scripts/uga.gd" id="1_wepkn"]
 [ext_resource type="Texture2D" uid="uid://7jvm6geb1a3u" path="res://Assests/ugaHit.png" id="2_654si"]
 [ext_resource type="Texture2D" uid="uid://u1ggf7f74b5j" path="res://Assests/ugaWalk.png" id="2_j42sm"]
 [ext_resource type="Texture2D" uid="uid://cn4obsed6kd2l" path="res://Assests/ugaWalk1.png" id="3_wepkn"]

@@ -33,11 +33,11 @@ sources/0 = SubResource("TileSetAtlasSource_2k2ja")
 script = ExtResource("1_3fgs5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=574150102]
-position = Vector2(593, -9)
-scale = Vector2(4.503251, 3.319202)
+position = Vector2(581.39594, -9)
+scale = Vector2(4.528156, 3.319202)
 texture = ExtResource("2_dx5hc")
 region_enabled = true
-region_rect = Rect2(0, 478.67468, 263.77808, 401.32532)
+region_rect = Rect2(1.6934204, 478.67468, 256.34827, 401.32532)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=298532631]
 scale = Vector2(2, 2)
@@ -56,14 +56,18 @@ position = Vector2(608, -227)
 [node name="CircleCenter4" type="Marker2D" parent="." unique_id=955709402]
 position = Vector2(610, -389)
 
+[node name="CircleCenter5" type="Marker2D" parent="." unique_id=1449033356]
+position = Vector2(599, -62)
+
 [node name="CharacterBody2D" parent="." unique_id=2028421705 instance=ExtResource("4_2k2ja")]
 position = Vector2(526, 557)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1096951388 node_paths=PackedStringArray("player")]
+position = Vector2(2, -1)
 limit_left = 0
-limit_top = -678
+limit_top = -666
 limit_right = 1152
-limit_bottom = 661
+limit_bottom = 673
 script = ExtResource("5_yergv")
 player = NodePath("../CharacterBody2D")
 adjustment_speed = 10.0

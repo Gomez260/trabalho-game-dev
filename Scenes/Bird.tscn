@@ -31,6 +31,8 @@ animations = [{
 size = Vector2(80.16138, 21.09939)
 
 [node name="Area2D" type="Area2D" unique_id=1596155012]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_6djdu")
 hit_fall_speed = 400.0
 

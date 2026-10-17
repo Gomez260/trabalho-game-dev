@@ -95,11 +95,11 @@ func _process(_delta: float) -> void:
 
 	var screen_height = get_viewport_rect().size.y
 	var camera_bottom = camera.get_screen_center_position().y + screen_height / (2.0 * camera.zoom.y)
-		
-	if global_position.y > camera_bottom + 300.0:
+	print("Uga não removido! Y: ", global_position.y, " | Limite: ", camera_bottom)
+	if global_position.y > camera_bottom:
 		print("Uga removido! Y: ", global_position.y, " | Limite: ", camera_bottom)
 		queue_free()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
-		take_hit()
+		take_hit()	

@@ -106,6 +106,5 @@ func break_tile() -> void:
 
 		# O player precisa estar acima do tile
 		if global_position.y > tile_global_position.y:
-			print("colidiu")
 			tilemap.erase_cell(cell)
 			break

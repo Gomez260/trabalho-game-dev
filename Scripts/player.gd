@@ -82,7 +82,7 @@ func break_tile() -> void:
 		var collision = get_slide_collision(i)
 		var normal = collision.get_normal()
 
-		if normal.y < 0.1 or velocity.y > 0:
+		if velocity.y > 0:
 			continue
 
 		if collision.get_collider() != tilemap:

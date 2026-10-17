@@ -5,7 +5,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var hit_area = $CollisionShape2D2
+@onready var hit_area: Area2D = $CollisionShape2D2
 @onready var tilemap: TileMapLayer = $"../TileMapLayer"
 
 
@@ -17,13 +17,19 @@ func hitting() -> void:
 
 	is_hitting = true
 	animated_sprite.play("Hit")
+	print("Apertei Z: iniciando ataque")
 
 	# Detecta os inimigos na área de ataque
 	var hitted = hit_area.get_overlapping_bodies()
-
+	
+	print("Corpos detectados: ", hitted.size())
+	
 	for body in hitted:
+		print("Objeto detectado: ", body.name)
+		print("Grupo Inimigos? ", body.is_in_group("Inimigos"))
 		if body.is_in_group("Inimigos"):
-			body.die()
+			print("caiu")
+			body.take_hit()
 
 	# Aguarda a animação terminar
 	await animated_sprite.animation_finished

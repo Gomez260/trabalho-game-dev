@@ -125,7 +125,7 @@ sprite_frames = SubResource("SpriteFrames_l0mw4")
 animation = &"Hit"
 
 [node name="CollisionShape2D2" type="Area2D" parent="." unique_id=658646049]
-collision_mask = 4
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D2" unique_id=2098920105]
 position = Vector2(10, -3.5)

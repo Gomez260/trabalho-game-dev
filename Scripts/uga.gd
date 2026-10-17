@@ -24,6 +24,7 @@ func _ready() -> void:
 	floor_ray.enabled = true
 	origin_position = global_position
 	update_direction()
+	add_to_group("Inimigos")
 	sprite.play("Walk")
 
 func _physics_process(delta: float) -> void:
@@ -95,7 +96,6 @@ func _process(_delta: float) -> void:
 
 	var screen_height = get_viewport_rect().size.y
 	var camera_bottom = camera.get_screen_center_position().y + screen_height / (2.0 * camera.zoom.y)
-	print("Uga não removido! Y: ", global_position.y, " | Limite: ", camera_bottom)
 	if global_position.y > camera_bottom:
 		print("Uga removido! Y: ", global_position.y, " | Limite: ", camera_bottom)
 		queue_free()

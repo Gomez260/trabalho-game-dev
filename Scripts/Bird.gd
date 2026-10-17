@@ -1,5 +1,5 @@
 
-extends Area2D
+extends CharacterBody2D
 
 @export var descent_distance: float = 70.0
 @export var descent_speed: float = 100.0
@@ -7,10 +7,11 @@ extends Area2D
 @export var radius_x: float = 300.0
 @export var radius_y: float = 80.0
 @export var circle_speed: float = 2.0
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @export var hit_fall_speed: float = 250.0
 @export var hit_rotation_speed: float = 8.0
-@export var exit_up_speed: float  = 15.0
+@export var exit_up_speed: float = 15.0
+
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var is_hit: bool = false
 
@@ -31,10 +32,10 @@ var angular_direction: float = 1.0
 var exit_direction: int = 1
 var entry_angle: float = 0.0
 
-
 func _ready() -> void:
 	sprite.play("Fly")
-	
+	add_to_group("Inimigos")
+
 	sprite.flip_h = direction < 0
 	angular_direction = 1.0 if direction > 0 else -1.0
 
@@ -45,7 +46,7 @@ func _ready() -> void:
 		radius_y * sin(entry_angle)
 	)
 
-	# Desce na diagonal até a entrada sda trajetória.
+	# Desce na diagonal até a entrada da trajetória.
 	descent_target = Vector2(
 		entry_point.x,
 		global_position.y + descent_distance
@@ -57,11 +58,11 @@ func _ready() -> void:
 
 	update_sprite_direction()
 
-
 func _process(delta: float) -> void:
 	if is_hit:
 		fall_after_hit(delta)
 		return
+
 	match state:
 		State.DESCENDING:
 			move_down_diagonal(delta)
@@ -69,7 +70,6 @@ func _process(delta: float) -> void:
 			move_in_circles(delta)
 		State.EXITING:
 			move_out(delta)
-
 
 func move_down_diagonal(delta: float) -> void:
 	global_position = global_position.move_toward(
@@ -82,7 +82,6 @@ func move_down_diagonal(delta: float) -> void:
 		angle = entry_angle
 		state = State.CIRCLING
 
-
 func move_in_circles(delta: float) -> void:
 	var previous_angle = angle
 	angle -= angular_direction * circle_speed * delta
@@ -91,7 +90,7 @@ func move_in_circles(delta: float) -> void:
 		radius_x * cos(angle),
 		radius_y * sin(angle)
 	)
-	
+
 	update_sprite_direction()
 
 	var previous_turn = floor(
@@ -100,7 +99,7 @@ func move_in_circles(delta: float) -> void:
 	var current_turn = floor(
 		abs(angle - entry_angle) / TAU
 	)
-	
+
 	if current_turn > previous_turn:
 		circles_completed += 1
 
@@ -120,7 +119,6 @@ func update_sprite_direction() -> void:
 	if abs(horizontal_velocity) > 0.05:
 		sprite.flip_h = horizontal_velocity > 0.0
 
-
 func move_out(delta: float) -> void:
 	global_position.x += exit_direction * exit_speed * delta
 	global_position.y -= exit_up_speed * delta
@@ -131,28 +129,24 @@ func move_out(delta: float) -> void:
 		queue_free()
 	elif exit_direction > 0 and global_position.x > screen_width + 100.0:
 		queue_free()
-		
+
 func take_hit() -> void:
 	if is_hit:
 		return
 
 	is_hit = true
 	state = State.EXITING
-
 	sprite.play("Hit")
-	
+
 func fall_after_hit(delta: float) -> void:
 	global_position.y += hit_fall_speed * delta
-
 	sprite.rotation += hit_rotation_speed * delta
 
 	var screen_height = get_viewport_rect().size.y
 
 	if global_position.y > screen_height + 100.0:
 		queue_free()
-		
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("hitBird"):
 		take_hit()
-
-	

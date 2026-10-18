@@ -9,7 +9,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var viewport = get_viewport_rect()
 	
 	var player_screen_number = int((player.position.y - limit_bottom))
 	var camera_screen_number = int((position.y - limit_bottom))

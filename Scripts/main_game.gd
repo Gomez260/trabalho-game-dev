@@ -6,6 +6,8 @@ const UGA_SCENE = preload("res://Scenes/Uga.tscn")
 const DISTANCIA_NIVEL_UGA: float = 160.0
 const DISTANCIA_LATERAL: float = 30.0
 
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+
 @onready var circle_centers: Array[Marker2D] = [
 	$CircleCenter1,
 	$CircleCenter2,
@@ -20,10 +22,9 @@ var ugas: Dictionary = {}
 
 func _ready() -> void:
 	spawn_bird()
-
 	spawn_uga(0)
 	spawn_uga(1)
-
+	canvas_layer.hide()
 
 func spawn_uga(nivel: int) -> void:
 	var uga = UGA_SCENE.instantiate()
@@ -104,3 +105,14 @@ func spawn_bird() -> void:
 
 	add_child(bird)
 	bird.tree_exited.connect(spawn_bird)
+	
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		canvas_layer.show()
+		get_tree().paused = true
+		
+func _on_button_pressed() -> void:
+	get_tree().paused = false
+	canvas_layer.hide()
+	get_tree().reload_current_scene()
+	

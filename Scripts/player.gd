@@ -8,8 +8,28 @@ const JUMP_VELOCITY = -600.0
 @onready var hit_area: Area2D = $CollisionShape2D2
 @onready var tilemap: TileMapLayer = $"../TileMapLayer"
 
+@export var vidas: int = 3
 
+var posicao_inicial: Vector2 
+var invencible: bool = false
 var is_hitting := false
+
+func _ready() -> void:
+	posicao_inicial = global_position
+
+func take_damage() -> void:
+	if invencible:
+		pass
+	vidas -= 1
+	invencible = true
+	if vidas <= 0:
+		get_tree().reload_current_scene()
+	else:
+		global_position = posicao_inicial
+		velocity = Vector2.ZERO
+		
+	await get_tree().create_timer(1.5).timeout
+	invencible = false
 
 func hitting() -> void:
 	if is_hitting:
@@ -17,7 +37,6 @@ func hitting() -> void:
 
 	is_hitting = true
 	animated_sprite.play("Hit")
-	print("Apertei Z: iniciando ataque")
 
 	# Detecta os inimigos na área de ataque
 	var hitted = hit_area.get_overlapping_bodies()
@@ -25,10 +44,7 @@ func hitting() -> void:
 	print("Corpos detectados: ", hitted.size())
 	
 	for body in hitted:
-		print("Objeto detectado: ", body.name)
-		print("Grupo Inimigos? ", body.is_in_group("Inimigos"))
 		if body.is_in_group("Inimigos"):
-			print("caiu")
 			body.take_hit()
 
 	# Aguarda a animação terminar
@@ -60,7 +76,7 @@ func _physics_process(delta: float) -> void:
 	# Direção do personagem e área de ataque
 	if direction != 0:
 		animated_sprite.flip_h = direction < 0
-		hit_area.position.x = 0 if direction > 0 else -20
+		hit_area.position.x = 0 if direction > 0 else -40
 
 	# Ataque
 	if Input.is_action_pressed("Hit") and not is_hitting:
@@ -74,7 +90,6 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.play("Walk")
 		else:
 			animated_sprite.play("Idle")
-
 	# Teletransporte horizontal
 	if global_position.x < 0:
 		global_position.x = viewport.size.x
@@ -86,7 +101,6 @@ func _physics_process(delta: float) -> void:
 func break_tile() -> void:
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
-		var normal = collision.get_normal()
 
 		if velocity.y > 0:
 			continue

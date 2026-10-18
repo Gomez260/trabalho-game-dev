@@ -3,8 +3,11 @@
 [ext_resource type="Script" uid="uid://bbe1ykubffgju" path="res://Scripts/player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://blfpbur1i1xoo" path="res://Assests/player.png" id="1_rpqav"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e7my"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gntrk"]
 size = Vector2(16, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e7my"]
+size = Vector2(10, 38)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kyqiw"]
 atlas = ExtResource("1_rpqav")
@@ -116,6 +119,13 @@ size = Vector2(40, 50)
 collision_mask = 6
 script = ExtResource("1_kyqiw")
 
+[node name="Area2D" type="Area2D" parent="." unique_id=290304604]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1898459855]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_gntrk")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=209506994]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_1e7my")
@@ -130,3 +140,5 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D2" unique_id=2098920105]
 position = Vector2(20, -3.5)
 shape = SubResource("RectangleShape2D_kyqiw")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -11,7 +11,7 @@ texture = ExtResource("3_ldq11")
 margins = Vector2i(2, 3)
 texture_region_size = Vector2i(16, 14)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7.01449, 8, -6.834631, 8, 6.115198, -8, 5.935339)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7.01449, 8, -7.0052624, 8, 6.115198, -8, 5.935339)
 0:0/0/custom_data_0 = true
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(6.903737, -6.903737, 6.903737, -0.9137306, -6.903737, -1.0152559, -7.0052624, -7.005263)
@@ -72,7 +72,7 @@ position = Vector2(610, -389)
 position = Vector2(599, -62)
 
 [node name="CharacterBody2D" parent="." unique_id=2028421705 instance=ExtResource("4_2k2ja")]
-position = Vector2(594, 554)
+position = Vector2(611, 551)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1096951388 node_paths=PackedStringArray("player")]
 position = Vector2(2, -1)
@@ -122,7 +122,7 @@ anchor_right = 1.0
 offset_bottom = 176.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 100
-text = "Você venceu!"
+text = "Você perdeu!"
 horizontal_alignment = 1
 vertical_alignment = 1
 

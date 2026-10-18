@@ -23,13 +23,13 @@ func take_damage() -> void:
 	vidas -= 1
 	invencible = true
 	if vidas <= 0:
-		get_tree().reload_current_scene()
+		get_node("..").defeat_screen()
 	else:
 		global_position = posicao_inicial
 		velocity = Vector2.ZERO
 		
-	await get_tree().create_timer(1.5).timeout
-	invencible = false
+		await get_tree().create_timer(1.5).timeout
+		invencible = false
 
 func hitting() -> void:
 	if is_hitting:
@@ -128,3 +128,10 @@ func break_tile() -> void:
 		if global_position.y > tile_global_position.y:
 			tilemap.erase_cell(cell)
 			break
+
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Inimigos"):
+		print("Dano")
+		take_damage()

@@ -38,6 +38,9 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntayv"]
+size = Vector2(57, 60)
+
 [node name="Area2D" type="CharacterBody2D" unique_id=290910368]
 collision_layer = 4
 collision_mask = 3
@@ -53,3 +56,9 @@ animation = &"Hit"
 frame_progress = 0.6124915
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1574671634]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=587397983]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2107639008]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_ntayv")

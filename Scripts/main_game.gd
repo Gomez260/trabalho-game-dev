@@ -113,8 +113,14 @@ func spawn_bird() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
+		canvas_layer.get_child(0).get_child(1).text = "Voce venceu!"
 		canvas_layer.show()
 		get_tree().paused = true
+
+func defeat_screen() -> void:
+	canvas_layer.get_child(0).get_child(1).text = "Voce perdeu!"
+	canvas_layer.show()
+	get_tree().paused = true
 
 func _on_button_pressed() -> void:
 	reiniciando = true

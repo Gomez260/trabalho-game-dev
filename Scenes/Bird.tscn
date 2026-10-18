@@ -30,6 +30,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eofqg"]
 size = Vector2(80.16138, 21.09939)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6djdu"]
+size = Vector2(82, 63)
+
 [node name="Area2D" type="CharacterBody2D" unique_id=75350278]
 collision_layer = 4
 collision_mask = 3
@@ -45,3 +48,9 @@ speed_scale = 0.7
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1337394894]
 scale = Vector2(1.0229361, -2.9858682)
 shape = SubResource("RectangleShape2D_eofqg")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=807797297]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1707406671]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_6djdu")

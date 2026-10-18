@@ -19,7 +19,7 @@ const DISTANCIA_LATERAL: float = 30.0
 # Guarda as referências das Ugas que ainda existem.
 var ugas: Dictionary = {}
 
-
+var reiniciando: bool = false
 func _ready() -> void:
 	spawn_bird()
 	spawn_uga(0)
@@ -54,13 +54,13 @@ func spawn_uga(nivel: int) -> void:
 	uga.direction = 1 if from_left else -1
 	uga.update_direction()
 
-
 func _on_uga_tree_exited(id_morto: int) -> void:
 	ugas.erase(id_morto)
 
-	# Espera a remoção da Uga terminar antes de escolher o novo nível.
-	call_deferred("_spawn_uga_nivel_livre")
+	if reiniciando or not is_inside_tree():
+		return
 
+	call_deferred("_spawn_uga_nivel_livre")
 
 func _spawn_uga_nivel_livre() -> void:
 	var player: CharacterBody2D = $CharacterBody2D
@@ -82,11 +82,16 @@ func _spawn_uga_nivel_livre() -> void:
 
 	spawn_uga(novo_nivel)
 
-
 func spawn_bird() -> void:
 	var bird = BIRD_SCENE.instantiate()
 
-	var screen_size = get_viewport().get_visible_rect().size
+	var viewport = get_viewport()
+
+	if viewport == null:
+		push_error("MainGame ainda não está associado a uma Viewport.")
+		return
+
+	var screen_size = viewport.get_visible_rect().size
 	var from_left = randf() < 0.5
 
 	bird.direction = 1 if from_left else -1
@@ -104,15 +109,20 @@ func spawn_bird() -> void:
 	bird.circle_center = center_marker.global_position
 
 	add_child(bird)
-	bird.tree_exited.connect(spawn_bird)
-	
+	bird.tree_exited.connect(_on_bird_tree_exited)
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		canvas_layer.show()
 		get_tree().paused = true
-		
+
 func _on_button_pressed() -> void:
+	reiniciando = true
 	get_tree().paused = false
-	canvas_layer.hide()
 	get_tree().reload_current_scene()
-	
+
+func _on_bird_tree_exited() -> void:
+	if reiniciando or not is_inside_tree():
+		return
+
+	call_deferred("spawn_bird")
